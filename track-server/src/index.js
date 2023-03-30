@@ -1,8 +1,14 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+
 const { mongoUri } = require("./data");
+const authRouter = require("./routes/authRoutes");
 
 const app = express();
+
+app.use(bodyParser.json());
+app.use(authRouter);
 
 mongoose.connect(mongoUri);
 mongoose.connection.on("connected", () => {
